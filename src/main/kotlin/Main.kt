@@ -5,21 +5,8 @@ fun main(args: Array<String>) {
 
     // colores texto
     val GREEN = "\u001B[32m"
-    val RESET = "\u001B[0m"
-    val WHITE = "\u001B[37m"
     val RED = "\u001B[31m"
     val YELLOW = "\u001B[33m"
-    val BLUE = "\u001B[34m"
-    val PURPLE = "\u001B[35m"
-    val CYAN = "\u001B[36m"
-    //colores fondo
-    val GREEN_BACKGROUND = "\u001B[42m"
-    val RED_BACKGROUND = "\u001B[41m"
-    val YELLOW_BACKGROUND = "\u001B[43m"
-    val BLUE_BACKGROUND = "\u001B[44m"
-    val PURPLE_BACKGROUND = "\u001B[45m"
-    val CYAN_BACKGROUND = "\u001B[46m"
-    val WHITE_BACKGROUND = "\u001B[47m"
 
     val list = listOf("uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez")
 
@@ -37,6 +24,7 @@ fun main(args: Array<String>) {
 
     do{
         DibujoAhorcado.dibujar(fallos)
+        if(fallos>5) print(YELLOW)
         println("Estado de la palabra secreta: $pal")
         //println("DEBUG_SOL: $sol")
         println("Llevas $fallos fallos (máximo número de fallos permitidos 7). Introduce una letra que creas que está en la palabra secreta")
@@ -83,7 +71,7 @@ fun main(args: Array<String>) {
 
         //Si se ha completado la palabra el jugador gana el juego y este termina
         if(aciertos==sol.length){
-            println("¡Has ganado! ¡El pobre John Ahorcado te estará agradecido de por vida!")
+            println(GREEN+"¡Has ganado! ¡El pobre John Ahorcado te estará agradecido de por vida!")
             cerrarJuego()
         }
 
@@ -92,7 +80,7 @@ fun main(args: Array<String>) {
 
     //Como solo se puede salir del bucle cuando se llega al límite de fallos, se muestra aquí el mensaje comunicando al jugador que ha perdido
     DibujoAhorcado.dibujar(7)
-    println("¡Que lástima! ¡No has podido salvar al pobre John Ahorcado de un destino fatal! Vuelve a intentarlo en otra vida")
+    println(RED+"¡Que lástima! ¡No has podido salvar al pobre John Ahorcado de un destino fatal! Vuelve a intentarlo en otra vida")
     cerrarJuego()
 }
 
