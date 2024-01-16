@@ -1,7 +1,7 @@
 import java.lang.StringBuilder
 import kotlin.system.exitProcess
 
-fun main(args: Array<String>) {
+fun main() {
 
     // colores texto
     val GREEN = "\u001B[32m"
@@ -11,6 +11,7 @@ fun main(args: Array<String>) {
     val list = listOf("uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez")
 
     val rm = ReproductorMidi("pugnodollari.mid")
+
     println("Cargando juego...")
     Thread.sleep(5000)
 
@@ -30,7 +31,7 @@ fun main(args: Array<String>) {
         println("Llevas $fallos fallos (máximo número de fallos permitidos 7). Introduce una letra que creas que está en la palabra secreta")
 
         //Pequeña comprobación para evitar excepciones por entrada vacía
-        var r = inputHandler(readln(), false)
+        val r = inputHandler(readln(), false)
 
         //Si la respuesta está vacía cuenta como fallo y pasa al siguiente turno
         if(r.length<1) {
@@ -39,7 +40,7 @@ fun main(args: Array<String>) {
         }
 
         //Se tomará como respuesta el primer caracter, independientemente de la longitud de la entrada
-        var res = r[0]
+        val res = r[0]
 
         //Se comprueba que la letra introducida no sea repetida. En caso de serlo será ignorada y se avanzará al siguiente turno
         var rep=false
@@ -61,7 +62,7 @@ fun main(args: Array<String>) {
                     listaRespuestas.add(res)
                 }
                 aciertos++
-                var sb = StringBuilder(pal)
+                val sb = StringBuilder(pal)
                 sb.setCharAt(i,res)
                 pal=sb.toString()
             }
@@ -72,7 +73,7 @@ fun main(args: Array<String>) {
         //Si se ha completado la palabra el jugador gana el juego y este termina
         if(aciertos==sol.length){
             println(GREEN+"¡Has ganado! ¡El pobre John Ahorcado te estará agradecido de por vida!")
-            cerrarJuego()
+            cerrarJuego(rm)
         }
 
     }
@@ -81,7 +82,7 @@ fun main(args: Array<String>) {
     //Como solo se puede salir del bucle cuando se llega al límite de fallos, se muestra aquí el mensaje comunicando al jugador que ha perdido
     DibujoAhorcado.dibujar(7)
     println(RED+"¡Que lástima! ¡No has podido salvar al pobre John Ahorcado de un destino fatal! Vuelve a intentarlo en otra vida")
-    cerrarJuego()
+    cerrarJuego(rm)
 }
 
 
@@ -98,7 +99,7 @@ fun creaPalabra(sol:String):String{
 
 fun inputHandler(input:String, e:Boolean):String{
     if(input.length>0){
-        return input[0].toString()
+        return input[0].toString().lowercase()
     }
     else if(!e){
         println("¡Cuidado, has enviado una respuesta vacía! Puedes intentarlo de nuevo, pero si vuelve a pasar contará como fallo")
@@ -110,8 +111,9 @@ fun inputHandler(input:String, e:Boolean):String{
 }
 
 //Para evitar un cierre abrupto que corte la música de golpe
-fun cerrarJuego(){
+private fun cerrarJuego(rm:ReproductorMidi){
     println("Pulsa ENTER para cerrar el juego")
     readln()
+    rm.cerrar()
     exitProcess(0)
 }
