@@ -1,1 +1,2 @@
-  Nota: desconozco la causa exacta del fallo que ocurre al final del vídeo (el juego no cerraba la primera vez que se le daba al enter). Es poco común, con darle otra vez ya funciona y sigue quedando mejor que un corte brusco de la música, por lo que lo he dejado tal cual está
+# Ahoracado
+Pequeña versión del célebro juego del ahorcado desarrollada en Kotlin. El propósito de la tarea era aprender sobre el uso de librerías java en Kotlin (la entrega propiamente dicha es el fichero [Main.kt](https://github.com/giladamuzfranciscojavier/Ahorcado/blob/master/src/main/kotlin/Main.kt), el resto fueron proporcionados como parte del enunciado).
